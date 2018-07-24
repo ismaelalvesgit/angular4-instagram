@@ -2,36 +2,83 @@
   <div class="card-body">
     <div class="card-title"></div>
     
-    <form>
+    <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
       <div class="form-group">
         <input 
           type="email" 
           class="form-control" 
           placeholder="E-mail"
+          formControlName='email'
         >
       </div>
+
+      <div *ngIf="formulario.get('email').invalid && (formulario.get('email').dirty || formulario.get('email').touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="formulario.get('email').hasError('required')">
+          campo é Requido
+        </div>
+      </div>
+
       <div class="form-group">
         <input 
           type="text"
           class="form-control" 
           placeholder="Nome completo"
+          formControlName='nomeCompleto'
         >
       </div>
+
+      <div *ngIf="formulario.get('nomeCompleto').invalid && (formulario.get('nomeCompleto').dirty || formulario.get('nomeCompleto').touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="formulario.get('nomeCompleto').hasError('required')">
+          campo é Requido
+        </div>
+      </div>
+
       <div class="form-group">
         <input 
           type="text"
           class="form-control" 
           placeholder="Nome de usuário"
+          formControlName='usuario'
         >
       </div>
+
+      <div *ngIf="formulario.get('usuario').invalid && (formulario.get('usuario').dirty || formulario.get('usuario').touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="formulario.get('usuario').hasError('required')">
+          campo é Requido
+        </div>
+      </div>
+
       <div class="form-group">
         <input 
           type="password"
           class="form-control" 
           placeholder="Senha"
+          formControlName='senha'
         >
       </div>
-      <button type="submit" class="btn btn-primary btn-sm btn-block">Cadastre-se</button>
+
+      <div *ngIf="formulario.get('senha').invalid && (formulario.get('senha').dirty || formulario.get('senha').touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="formulario.get('senha').hasError('required')">
+          campo é Requido
+        </div>
+        <div *ngIf="formulario.get('senha').hasError('minlength')">
+          Minimo 6 caracteres
+        </div>
+      </div>
+
+      <button 
+      type="submit" 
+      class="btn btn-primary btn-sm btn-block"
+      [disabled]="!formulario.valid"
+      >Cadastre-se</button>
     </form>
     <hr />
 
@@ -43,7 +90,7 @@
 <div class="card" style="width: 20rem;">
   <div class="card-body">
     <p class="card-text">
-      Tem uma conta? <a href="#" class="card-link">Faça login</a>
+      Tem uma conta? <a href="#"  (click)="trocaLogin()" class="card-link">Faça login</a>
     </p> 
   </div>
 </div>
