@@ -1,0 +1,60 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <form [formGroup]="formulario" (ngSubmit)="publicar()" *ngIf="estadoProgresso == 'normal'">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Publicação</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input
+        type="file"
+        accept="imagem/*"
+        class="form-control-file"
+        (change)="capturarImg($event)"
+        >
+        <input
+        type="text"
+        class="form-control"
+        formControlName="titulo"
+        placeholder="Titulo"
+        >
+     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary">Publicar</button>
+      </div>
+      </form>
+    </div>
+
+    <div class="modal-content" *ngIf="estadoProgresso == 'andamento'">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Publicação em andamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{estadoUpload}} %
+      </div> 
+    </div>
+
+
+    <div class="modal-content" *ngIf="estadoProgresso == 'completo'">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Publicado com sucesso</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        publicação enviada com sucesso !!!
+      </div> 
+    </div>
+
+  </div>
+</div>
